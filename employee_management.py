@@ -22,13 +22,15 @@ def view_employees(selected):
     print(f"Employee salary:  {employee_list[selected]['salary']}")
 
 
-def search_employee(Id):
+def search_employee(employee_id):
+    found = False
     for i in range(len(employee_list)):
-        if Id == employee_list[i]["id"]:
+        if employee_id == employee_list[i]["id"]:
             view_employees(i)
+            found = True
             break
-    print("Employee ID not found")
-
+    if not found:
+        print("Employee ID not found")
 
 employee_list = []
 
