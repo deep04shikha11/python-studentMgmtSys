@@ -1,9 +1,16 @@
 def add_employee():
     employee_id = len(employee_list) + 101
     name = input("Enter Employee Name: ")
-    age = int(input("Enter Employee Age: "))
+    name = type_checking("name", name)
+	
+    age = input("Enter Employee Age: ")
+    age = type_checking("age", age)
+	
     department = input("Enter Employee Department: ")
-    salary = float(input("Enter Employee Salary: "))
+    department = type_checking("department", department)
+	
+    salary = input("Enter Employee Salary: ")
+    salary = type_checking("salary", salary)
 
     employee = {
         "id": employee_id,
@@ -53,6 +60,28 @@ def delete_employee(id):
             employee_list.remove(employee_list[i])
             print("Employee removed successfully")
             break		
+
+def type_checking(type,value):
+	if type == "name" or type == "department":
+		if value.replace(" ","").isalpha():
+			return value
+		else:
+			return False
+	elif type == "age":
+		while True:
+			try:
+				age = int(input("Enter employee age: "))
+				break
+			except ValueError:
+				print("Invalid age. Please enter a number.")
+	if type == "salary":
+		while True:
+			try:
+				salary = float(input("Enter employee salary: "))
+				break
+			except ValueError:
+				print("Invalid salary. Please enter a number.")
+		
 
 employee_list = []
 
