@@ -2,13 +2,13 @@ def add_employee():
     employee_id = len(employee_list) + 101
     name = input("Enter Employee Name: ")
     name = type_checking("name", name)
-	
+
     age = input("Enter Employee Age: ")
     age = type_checking("age", age)
-	
+
     department = input("Enter Employee Department: ")
     department = type_checking("department", department)
-	
+
     salary = input("Enter Employee Salary: ")
     salary = type_checking("salary", salary)
 
@@ -59,29 +59,34 @@ def delete_employee(id):
         if id == employee_list[i]["id"]:
             employee_list.remove(employee_list[i])
             print("Employee removed successfully")
-            break		
+            break
 
-def type_checking(type,value):
-	if type == "name" or type == "department":
-		if value.replace(" ","").isalpha():
-			return value
-		else:
-			return False
-	elif type == "age":
-		while True:
-			try:
-				age = int(input("Enter employee age: "))
-				break
-			except ValueError:
-				print("Invalid age. Please enter a number.")
-	if type == "salary":
-		while True:
-			try:
-				salary = float(input("Enter employee salary: "))
-				break
-			except ValueError:
-				print("Invalid salary. Please enter a number.")
-		
+
+def type_checking(type, value):
+    if type == "name" or type == "department":
+        if value.replace(" ", "").isalpha():
+            return value
+        else:
+            return False
+
+    elif type == "age":
+        while True:
+            try:
+                age = int(value)
+                return age
+            except ValueError:
+                print("Invalid age. Please enter a number.")
+                value = input("Enter employee age: ")
+
+    elif type == "salary":
+        while True:
+            try:
+                salary = float(value)
+                return salary
+            except ValueError:
+                print("Invalid salary. Please enter a number.")
+                value = input("Enter employee salary: ")
+
 
 employee_list = []
 
@@ -95,7 +100,11 @@ while True:
     elif choice == "2":
         if len(employee_list) > 0:
             selected = int(input(f"Select which index you want to show out of total {len(employee_list)}: "))
-            view_employees(selected)
+
+            if 0 <= selected < len(employee_list):
+                view_employees(selected)
+            else:
+                print("Invalid employee selection.")
         else:
             print("No Employee exist")
 
